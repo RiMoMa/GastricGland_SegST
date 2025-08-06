@@ -5,9 +5,9 @@ n_class:
 batch_size:
   value: 2
 epochs:
-  value: 200
+  value: 50
 learning_rate:
-  value: 1e-3
+  value: 1e-4
 optimizer:
   value: torch.optim.Adam
 encoder_model:

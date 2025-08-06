@@ -9,9 +9,9 @@ import math
 
 # ==== CONFIGURACIÓN ====
 input_dir = "/home/ricardo/Glands-Urkunina/input_data/images/"
-output_base = "./patches_20xR/"
+output_base = "./patches_10xR/"
 patch_size = 510+130
-target_magnification = 20
+target_magnification = 10
 
 # Control de dataset
 max_unlabeled_per_case = 20   # límite máximo de parches positivos por WSI unlabeled

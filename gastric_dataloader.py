@@ -44,7 +44,8 @@ def get_train_transform(patch_size, prob=0.5):
 class GastricDataLoader(DataLoader):
     def __init__(self, data, batch_size, patch_size, num_threads_in_multithreaded,
                  crop_status=True, crop_type="random", margins=(0,0,0),
-                 seed_for_shuffle=1234, return_incomplete=False, shuffle=True, infinite=True):
+                 seed_for_shuffle=1234, return_incomplete=False, shuffle=True, infinite=True,
+                 tr_transforms=None):
         super().__init__(data, batch_size, num_threads_in_multithreaded,
                          seed_for_shuffle, return_incomplete, shuffle, infinite)
         self.patch_size = patch_size
@@ -53,7 +54,7 @@ class GastricDataLoader(DataLoader):
         self.crop_status = crop_status
         self.crop_type = crop_type
         self.margins = margins
-
+        self.tr_transforms = tr_transforms
     @staticmethod
     def load_image(img_path):
         img = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0
@@ -89,7 +90,17 @@ class GastricDataLoader(DataLoader):
                 img[i] = img_data[0]
                 seg[i] = seg_data[0]
             else:
-                img[i] = img_data
-                seg[i] = seg_data
+                pass
+            # 🔥 Aquí aplicas los aumentos si están definidos
+            if self.tr_transforms is not None:
+                augmented = self.tr_transforms(data=img_data, seg=seg_data)
+                img_data = augmented['data'][0]  # (3, H, W)
+                seg_data = augmented['seg'][0]  # (1, H, W)
 
+            img[i] = img_data
+            seg[i] = seg_data
         return {'data': img, 'seg': seg, 'patient_id': patient_id}
+
+    def __len__(self):
+        import math
+        return math.ceil(len(self.indices) / self.batch_size)

@@ -1,2 +1,3 @@
 wandb/
-patches_20xR/
+patches*
+model*.pth

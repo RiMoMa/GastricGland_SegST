@@ -7,7 +7,7 @@ import numpy as np
 
 # ==== CONFIGURACIÓN ====
 input_dir = "/home/ricardo/Glands-Urkunina/input_data/images/"
-output_img_dir = "./patches_20x/images/"
+output_img_dir = "./patches_10x/images/"
 output_mask_dir = "./patches_20x/masks/"
 patch_size = 512
 target_magnification = 20
