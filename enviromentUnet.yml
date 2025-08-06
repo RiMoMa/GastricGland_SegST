@@ -1,0 +1,24 @@
+name: gastro2025UNET
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - openslide
+  - openslide-python
+  - numpy
+  - opencv
+  - shapely
+  - scikit-image
+  - pandas
+  - matplotlib
+  - psutil
+
+  - pip
+  - pip:
+      - torch>=2.0
+      - torchvision
+      - tqdm      
+      - batchgenerators
+      - segmentation-models-pytorch
+      - timm
