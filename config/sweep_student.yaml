@@ -1,0 +1,27 @@
+program: 3_experiments.py
+method: grid
+name: sweep_teacher_student
+metric:
+  name: val_dice
+  goal: maximize
+parameters:
+  epochs:
+    values: [20, 30, 50]
+  learning_rate:
+    values: [0.00005, 0.0001, 0.0005, 0.001, 0.002]
+  optimizer:
+    values: ["torch.optim.Adam"]
+  encoder_model:
+    values: ["resnet18"]
+  n_class:
+    values: [1]
+  patchsize:
+    values: [256, 512]
+  batchsize:
+    values: [8, 16, 32, 48]
+  augmentation_prob:
+    values: [0.3, 0.5, 0.7]
+  lambda_consistency:
+    values: [0.5, 1.0, 2.0]
+  ema_decay:
+    values: [0.99, 0.999]

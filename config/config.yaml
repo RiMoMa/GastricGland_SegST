@@ -16,3 +16,7 @@ patch_size:
   value: (512, 512)
 aug_prob:
   value: 0.5
+lambda_consistency:
+  value: 1.0
+ema_decay:
+  value: 0.99
